@@ -25,6 +25,6 @@ class Producer:
         assert(len(ids) >= len(vectors))
 
         for i in range(len(vectors)):
-            producer.send(MilvusRecord(id=ids[i], op=self._op, vector=vectors[i]))
+            producer.send(MilvusRecord(id=ids[i], op=self._op, vector=vectors[i]), partition_key=str(ids[i]))
         
         client.close()
