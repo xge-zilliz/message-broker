@@ -7,7 +7,9 @@ class Op(Enum):
     update = 2
     query = 3
 
+# NOTE: Use command `pulsar-admin schemas delete <topic-name>` to update schema
 class MilvusRecord(Record):
+    client_id = Integer()
     id = Integer()
     op = Op
     vector = Array(Float())
