@@ -18,7 +18,9 @@ class Producer:
     def send(self, vectors, ids=None):
         from pulsar.schema import AvroSchema
 
-        producer = self._client.create_producer(self._topic, schema=AvroSchema(MilvusRecord))
+        producer = self._client.create_producer(self._topic,
+                                                schema=AvroSchema(MilvusRecord),
+                                                batching_enabled=True)
 
         if ids is None:
             ids = generate_ids()

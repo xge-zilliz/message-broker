@@ -29,19 +29,15 @@ def mock_running():
 
 def insert():
     milvus.insert(topic=topic, records=vectors, ids=ids)
-    mock_running()
 
 def delete():
     milvus.delete(topic=topic, records=vectors, ids=ids)
-    mock_running()
 
 def update():
     milvus.update(topic=topic, records=vectors, ids=ids)
-    mock_running()
 
 def search():
     milvus.search(topic=topic, records=vectors, ids=ids)
-    mock_running()
 
 def test_client():
     # test insert
