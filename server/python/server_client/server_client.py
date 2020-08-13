@@ -26,4 +26,3 @@ class ServerClient(object):
               msg = consumer.receive()
               produce.send(content=msg.value(), event_timestamp=int(time.time() * 1000), partition_key=str(msg.value().id))
               consumer.acknowledge(msg)
-              print("fuck")
