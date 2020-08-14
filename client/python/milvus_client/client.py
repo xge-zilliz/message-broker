@@ -44,14 +44,12 @@ class MilvusClient:
 
     def delete(self, topic: str, records, ids=None):
         op = Op.delete
-        topic = topic + "-delete-update"
         self._produce(topic, records, op, ids)
         res = self._consume(len(records))
         return res
 
     def update(self, topic: str, records, ids=None):
         op = Op.update
-        topic = topic + "-delete-update"
         self._produce(topic, records, op, ids)
         res = self._consume(len(records))
         return res
