@@ -15,5 +15,6 @@ if __name__ == "__main__":
    service_client = ServerClient(config_param["brokerServiceUrl"])
    service_client.redeliver_message(token=config_param["token"],
                                     consumer_topic=config_param["consumerTopic"],
-                                    produce_topic=config_param["produceTopic"],
+                                    insert_topic=config_param["insertTopic"],
+                                    delete_topic=config_param["deleteTopic"],
                                     subscription_name=config_param["subscriptionName"])
