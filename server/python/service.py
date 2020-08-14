@@ -12,9 +12,5 @@ def get_config(filepath):
 if __name__ == "__main__":
    filepath = sys.argv[1]
    config_param = get_config(filepath)
-   service_client = ServerClient(config_param["brokerServiceUrl"])
-   service_client.redeliver_message(token=config_param["token"],
-                                    consumer_topic=config_param["consumerTopic"],
-                                    insert_topic=config_param["insertTopic"],
-                                    delete_topic=config_param["deleteTopic"],
-                                    subscription_name=config_param["subscriptionName"])
+   service_client = ServerClient(config_param["brokerServiceUrl"],config_param["topics"].split(','))
+   service_client.redeliver_message()
