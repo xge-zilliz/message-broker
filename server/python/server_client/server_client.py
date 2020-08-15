@@ -31,8 +31,6 @@ class ServerClient(object):
             delete_producers.append(client.create_producer(topic=d_and_u_topic, schema=AvroSchema(MilvusRecord)))
             i_and_q_topic = topic + "-insert"
             insert_producers.append(client.create_producer(topic=i_and_q_topic, schema=AvroSchema(MilvusRecord)))
-        print(delete_producers)
-        print(insert_producers)
         print("Service start successful !!!")
 
         while True:
@@ -40,7 +38,6 @@ class ServerClient(object):
             message_topic_name = msg.topic_name()
             for i, topic in enumerate(self._topics):
                 if message_topic_name.find(topic) != -1:
-                    print(i)
                     if msg.value().op in [Op.insert, Op.query]:
                         insert_producers[i].send(content=msg.value(), event_timestamp=int(time.time() * 1000),
                                                  partition_key=str(msg.value().id))
