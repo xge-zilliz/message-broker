@@ -36,7 +36,7 @@ class Consumer:
                 consumer.negative_acknowledge(msg)
 
             # TODO: use a better way to break consuming
-            if i >= num_of_result:
+            if i >= num_of_result - 1:
                 break
 
         return result
