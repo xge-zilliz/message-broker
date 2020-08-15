@@ -39,7 +39,6 @@ class ServerClient(object):
             message_topic_name = msg.topic_name()
             for i, topic in enumerate(self._topics):
                 if message_topic_name.find(topic) != -1:
-                    print(i)
                     if msg.value().op in [Op.insert, Op.query]:
                         insert_producers[i].send(content=msg.value(), event_timestamp=int(time.time() * 1000),
                                                  partition_key=str(msg.value().id))
