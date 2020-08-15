@@ -8,6 +8,7 @@ import string
 
 
 class ServerClient(object):
+
     def __init__(self, url=None, topics=None, token="None", subscription_name="subscription"):
         self._url = url
         self._topics = topics
@@ -31,8 +32,6 @@ class ServerClient(object):
             delete_producers.append(client.create_producer(topic=d_and_u_topic, schema=AvroSchema(MilvusRecord)))
             i_and_q_topic = topic + "-insert"
             insert_producers.append(client.create_producer(topic=i_and_q_topic, schema=AvroSchema(MilvusRecord)))
-        print(delete_producers)
-        print(insert_producers)
         print("Service start successful !!!")
 
         while True:
