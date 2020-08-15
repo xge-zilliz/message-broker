@@ -8,6 +8,7 @@ import string
 
 
 class ServerClient(object):
+
     def __init__(self, url=None, topics=None, token="None", subscription_name="subscription"):
         self._url = url
         self._topics = topics
