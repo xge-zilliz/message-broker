@@ -3,9 +3,11 @@ package storage
 import "C"
 import (
 	"fmt"
+	"time"
 )
 
 type Message struct {
+	time time.Time
 	value [2]int
 	id int
 }

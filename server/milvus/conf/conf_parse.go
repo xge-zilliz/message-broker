@@ -1,28 +1,22 @@
 package conf
 
-
 import (
 	"bufio"
-	"fmt"
 	"io"
+	"log"
 	"message-broker/server/milvus/tool"
 	"os"
 	"strings"
 )
 
-
-type InitConf struct {
-	topics tool.Vector
-}
-
 //读取key=value类型的配置文件
-func InitConfig(path string) map[string] InitConf{
-	config := make(map[string]InitConf)
+func InitConfig(path string) map[string] tool.Vector{
+	config := make(map[string]tool.Vector)
 
 	f, err := os.Open(path)
 	defer f.Close()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	r := bufio.NewReader(f)
@@ -40,25 +34,24 @@ func InitConfig(path string) map[string] InitConf{
 			continue
 		}
 		key := strings.TrimSpace(s[:index])
-
 		if len(key) == 0 {
 			continue
 		}
-
 		if _, ok := config[key]; !ok {
-			topic := *(tool.New(10))
-			conf := *(new(InitConf))
-			conf.topics = topic
-			config[key] = conf
+			topic := tool.New(10)
+			config[key] = *topic
 		}
 		value := strings.TrimSpace(s[index+1:])
 		if len(value) == 0 {
 			continue
 		}
-		topics := config[key].topics
-		topics.Append(value)
-		fmt.Println(topics)
+		vector := config[key]
+
+		slicedValue := strings.Split(value, ",")
+		for sIndex :=range slicedValue {
+			vector.Append(slicedValue[sIndex])
+		}
+		config[key] = vector
 	}
-	fmt.Println(config["topics"])
 	return config
 }
