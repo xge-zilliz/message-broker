@@ -1,0 +1,5 @@
+package milvus
+
+func insert(){
+
+}
